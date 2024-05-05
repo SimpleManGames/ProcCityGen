@@ -1,4 +1,4 @@
-namespace ProcCityGen.Interfaces.Field.Tensor
+namespace ProcCityGen.Interfaces.Fields.Tensor
 {
     using ProcCityGen.Data;
 

@@ -1,6 +1,6 @@
-namespace ProcCityGen.Fields.Scalars
+namespace ProcCityGen.Field.Scalars
 {
-    using ProcCityGen.Interfaces.Field.Scalars;
+    using ProcCityGen.Interfaces.Fields.Scalars;
 
     using Unity.Mathematics;
 

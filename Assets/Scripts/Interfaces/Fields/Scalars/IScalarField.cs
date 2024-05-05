@@ -1,4 +1,4 @@
-namespace ProcCityGen.Interfaces.Field.Scalars
+namespace ProcCityGen.Interfaces.Fields.Scalars
 {
     using Unity.Mathematics;
 

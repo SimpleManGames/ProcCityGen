@@ -1,8 +1,8 @@
-namespace ProcCityGen.Fields.Scalars.Extensions
+namespace ProcCityGen.Field.Scalars.Extensions
 {
-    using ProcCityGen.Fields.Vectors;
-    using ProcCityGen.Interfaces.Field.Scalars;
-    using ProcCityGen.Interfaces.Field.Vectors;
+    using ProcCityGen.Field.Vectors;
+    using ProcCityGen.Interfaces.Fields.Scalars;
+    using ProcCityGen.Interfaces.Fields.Vectors;
 
     public static class ScalarFieldExtensions
     {

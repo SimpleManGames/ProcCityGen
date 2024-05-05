@@ -3,7 +3,8 @@
     "rootNamespace": "ProcCityGen.Fields",
     "references": [
         "GUID:d64a5eb355544ae4c94c7f571bcc02fb",
-        "GUID:d8b63aba1907145bea998dd612889d6b"
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:38b92ce6d94de044ca609dcca8f25fe6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

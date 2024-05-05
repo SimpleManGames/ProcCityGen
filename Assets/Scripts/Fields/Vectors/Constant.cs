@@ -1,6 +1,6 @@
-namespace ProcCityGen.Fields.Vectors
+namespace ProcCityGen.Field.Vectors
 {
-    using ProcCityGen.Interfaces.Field.Vectors;
+    using ProcCityGen.Interfaces.Fields.Vectors;
 
     using Unity.Mathematics;
 
