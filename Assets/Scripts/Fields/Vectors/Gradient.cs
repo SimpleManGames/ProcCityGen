@@ -1,5 +1,8 @@
-namespace ProcCityGen
+namespace ProcCityGen.Fields.Vectors
 {
+    using ProcCityGen.Interfaces.Field.Scalars;
+    using ProcCityGen.Interfaces.Field.Vectors;
+
     using Unity.Mathematics;
 
     public class Gradient : IVector2Field

@@ -1,11 +1,8 @@
-namespace ProcCityGen
+namespace ProcCityGen.Fields.Scalars.Extensions
 {
-    using Unity.Mathematics;
-
-    public interface IScalarField
-    {
-        float Sample(float2 position);
-    }
+    using ProcCityGen.Fields.Vectors;
+    using ProcCityGen.Interfaces.Field.Scalars;
+    using ProcCityGen.Interfaces.Field.Vectors;
 
     public static class ScalarFieldExtensions
     {

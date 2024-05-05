@@ -1,0 +1,17 @@
+{
+    "name": "ProcCityGen.Interfaces",
+    "rootNamespace": "ProcCityGen.Interfaces",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:38b92ce6d94de044ca609dcca8f25fe6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,4 +1,4 @@
-namespace ProcCityGen
+namespace ProcCityGen.Data
 {
     using Unity.Mathematics;
 

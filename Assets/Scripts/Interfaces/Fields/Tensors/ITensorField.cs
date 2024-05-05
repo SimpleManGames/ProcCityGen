@@ -1,5 +1,7 @@
-namespace ProcCityGen
+namespace ProcCityGen.Interfaces.Field.Tensor
 {
+    using ProcCityGen.Data;
+
     using Unity.Mathematics;
 
     public interface ITensorField

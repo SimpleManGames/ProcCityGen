@@ -1,5 +1,7 @@
-namespace ProcCityGen
+namespace ProcCityGen.Fields.Vectors
 {
+    using ProcCityGen.Interfaces.Field.Vectors;
+
     using Unity.Mathematics;
 
     internal class Inverse
