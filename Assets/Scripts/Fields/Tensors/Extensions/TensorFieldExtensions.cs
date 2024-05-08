@@ -20,9 +20,21 @@ namespace ProcCityGen.Fields.Tensors
             return result;
         }
 
-        public static ITensorField DecayDistanceFromPoint(this ITensorField field, float2 center, float decay)
+        public static float GetTensorWeight(this ITensorField field, float2 point, bool smooth)
         {
-            return new PointDistanceDecay(field, center, decay);
+            float normDistanceToCenter = math.length(point - field.Center) / field.Size;
+
+            if (smooth)
+            {
+                return math.pow(normDistanceToCenter, -field.Decay);
+            }
+
+            if (field.Decay == 0 && normDistanceToCenter >= 1)
+            {
+                return 0;
+            }
+
+            return math.max(0, math.pow(1 - normDistanceToCenter, field.Decay));
         }
     }
 }

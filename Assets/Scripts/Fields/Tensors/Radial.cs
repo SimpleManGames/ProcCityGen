@@ -9,20 +9,27 @@ namespace ProcCityGen.Fields.Tensors
 
     public class Radial : ITensorField
     {
-        [SerializeField]
-        private readonly float2 _center;
+        [field: SerializeField]
+        public float2 Center { get; private set; }
+
+        [field: SerializeField]
+
+        public float Size { get; private set; }
+
+        [field: SerializeField]
+        public float Decay { get; private set; }
 
         public Radial(float2 center)
         {
-            _center = center;
+            Center = center;
         }
-        
+
         public void Sample(ref float2 position, out Tensor result)
         {
-            float2 t = new float2(position.x - _center.x, position.y - _center.y);
+            float2 t = new float2(position.x - Center.x, position.y - Center.y);
             float t1 = (t.y * t.y) - (t.x * t.x);
             float t2 = -2 * t.x * t.y;
-            result = new Tensor(t1, t2);
+            result = new Tensor(1, t1, t2);
         }
     }
 }

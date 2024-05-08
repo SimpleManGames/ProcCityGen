@@ -18,6 +18,7 @@ namespace ProcCityGen.Fields.Tensors
         {
             [TypeFilter("GetITensorFieldTypeList")]
             public ITensorField field;
+
             public float weight;
 
             private IEnumerable<Type> GetITensorFieldTypeList()
@@ -30,7 +31,13 @@ namespace ProcCityGen.Fields.Tensors
                 return q;
             }
         }
-        
+
+        public float2 Center { get; }
+
+        public float Size { get; }
+
+        public float Decay { get; }
+
         private float TotalWeight => _blends.Sum(x => x.weight);
 
         [OdinSerialize]
@@ -38,14 +45,18 @@ namespace ProcCityGen.Fields.Tensors
 
         public void Blend(ITensorField field, float weight = 1)
         {
-            _blends.Add(new WeightedTenserField{field = field, weight = weight});
+            _blends.Add(new WeightedTenserField
+            {
+                field = field,
+                weight = weight
+            });
         }
 
         public void Sample(ref float2 position, out Tensor result)
         {
-            result = new Tensor(0, 0);
+            result = new Tensor(0, 0, 0);
 
-            foreach (var blendPair in _blends)
+            foreach (WeightedTenserField blendPair in _blends)
             {
                 result += blendPair.weight / TotalWeight * blendPair.field.Sample(position);
             }

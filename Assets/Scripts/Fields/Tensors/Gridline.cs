@@ -11,37 +11,21 @@ namespace ProcCityGen.Fields.Tensors
 
     public class Gridline : ITensorField
     {
-        private Tensor? _basis;
+        public float2 Center { get; }
 
-        private Tensor Basis
-        {
-            get
-            {
-                _basis ??= CalculateBasis();
-                return (Tensor)_basis;
-            }
-        }
+        public float Size { get; }
 
-        [SerializeField] private readonly float _angle;
+        public float Decay { get; }
 
-        [SerializeField] private readonly float _length;
+        [SerializeField] private readonly float _angleInDegrees;
 
-        public Gridline(float angle, float length)
-        {
-            _angle = angle;
-            _length = length;
-
-            _basis = CalculateBasis();
-        }
+        private float theta => _angleInDegrees * (math.PI / 180);
 
         public void Sample(ref float2 position, out Tensor result)
         {
-            result = CalculateBasis();
-        }
-
-        private Tensor CalculateBasis()
-        {
-            return Tensor.FromRTheta(_length, math.radians(_angle));
+            float cos = math.cos(2 * theta);
+            float sin = math.sin(2 * theta);
+            result =  new Tensor(1, cos, sin);
         }
     }
 }

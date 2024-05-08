@@ -9,6 +9,12 @@ namespace ProcCityGen.Fields.Tensors
 
     public class Constant : ITensorField
     {
+        public float2 Center { get; }
+
+        public float Size { get; }
+
+        public float Decay { get; }
+        
         [SerializeField]
         private readonly Tensor _value;
 

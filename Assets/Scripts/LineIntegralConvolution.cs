@@ -24,14 +24,15 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
     public Texture2D whiteNoise;
 
     [InlineEditor, TypeFilter("GetITensorFieldTypeList"), OdinSerialize]
-    public ITensorField field;
+    public ITensorField Field { get; private set; }
 
     private IEigenField _eigenField;
+    private Material _material;
 
     // ReSharper disable once UnusedMember.Local
     private IEnumerable<Type> GetITensorFieldTypeList()
     {
-        var q = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+        IEnumerable<Type> q = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
             .Where(x => !x.IsAbstract)
             .Where(x => !x.IsGenericTypeDefinition)
             .Where(x => typeof(ITensorField).IsAssignableFrom(x));
@@ -42,12 +43,9 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
     [Button]
     public void Start()
     {
-        _eigenField = field.PreSample(new float2(0), new float2(width, height), 100);
-
         CreateWhiteNoise();
 
-        LIC();
-        GetComponent<MeshRenderer>().sharedMaterial.SetTexture("_MainTex", output);
+        Run();
     }
 
     private void CreateWhiteNoise()
@@ -62,7 +60,7 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 float value = Unity.Mathematics.noise.snoise(rand.NextFloat2(0f, 255f));
-                var color = new Color(value, value, value, 1.0f);
+                Color color = new Color(value, value, value, 1.0f);
                 whiteNoise.SetPixel(x, y, color);
             }
         }
@@ -70,8 +68,9 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
         whiteNoise.Apply();
     }
 
-    public void LIC()
+    private void Run()
     {
+        _eigenField = Field.PreSample(new float2(0), new float2(width, height), 100);
         output = new Texture2D(width, height);
 
         for (int x = 0; x < width; x++)
@@ -110,5 +109,12 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
             }
         }
         output.Apply();
+        _material.SetTexture("_MainTex", output);
+    }
+
+    private void OnValidate()
+    {
+        if (_material == null)
+            _material = GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

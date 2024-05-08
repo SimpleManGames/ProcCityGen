@@ -12,6 +12,12 @@ namespace ProcCityGen.Fields.Tensors
 
     public class Heightmap : ITensorField
     {
+        public float2 Center { get; }
+
+        public float Size { get; }
+
+        public float Decay { get; }
+
         [OdinSerialize]
         private readonly IVector2Field _gradient;
 
@@ -19,7 +25,7 @@ namespace ProcCityGen.Fields.Tensors
         {
             _gradient = new Gradient(height);
         }
-        
+
         public void Sample(ref float2 position, out Tensor result)
         {
             float2 gradient = _gradient.Sample(position);
@@ -27,7 +33,7 @@ namespace ProcCityGen.Fields.Tensors
             float theta = math.atan2(gradient.y, gradient.x) + (math.PI / 2);
             float r = math.sqrt(gradient.x * gradient.x + gradient.y * gradient.y);
 
-            result = Tensor.Normalize(Tensor.FromRTheta(r, theta));
+            result = new Tensor(0, 0, 0); //Tensor.Normalize(Tensor.FromAngle(theta));
         }
     }
 }

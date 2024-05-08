@@ -9,42 +9,37 @@ namespace ProcCityGen.Data
         //     | sin(2theta) -cos(2theta) |    | _ _ |
         // where R >= 0 and theta is [0, 2pi)
 
+        public readonly double r;
         public readonly double a;
         public readonly double b;
 
-        public Tensor(double a, double b)
+        public Tensor(double r, double a, double b)
         {
+            this.r = r;
             this.a = a;
             this.b = b;
         }
 
-        public static Tensor FromRTheta(double r, double theta)
+        public static Tensor FromAngle(double angle)
         {
-            return new Tensor(math.cos(theta * 4), math.sin(theta * 4));
-        }
-
-        public static Tensor FromXY(float2 xy)
-        {
-            float xy2 = -2 * xy.x * xy.y;
-            float diffSquares = xy.y * xy.y - xy.x * xy.x;
-            return Normalize(new Tensor(diffSquares, xy2));
+            return new Tensor(1, math.cos(angle * 4), math.sin(angle * 4));
         }
 
         public static Tensor Normalize(Tensor tensor)
         {
             double l = math.sqrt(tensor.a * tensor.a + tensor.b * tensor.b);
 
-            return math.abs(l) < math.EPSILON ? new Tensor(0, 0) : new Tensor(tensor.a / l, tensor.b / l);
+            return math.abs(l) < math.EPSILON ? new Tensor(0, 0, 0) : new Tensor(1, tensor.a / l, tensor.b / l);
         }
 
         public static Tensor operator +(Tensor left, Tensor right)
         {
-            return new Tensor(left.a + right.a, left.b + right.b);
+            return new Tensor(1, left.a + right.a, left.b + right.b);
         }
 
         public static Tensor operator *(double left, Tensor right)
         {
-            return new Tensor(left * right.a, left * right.b);
+            return new Tensor(1, left * right.a, left * right.b);
         }
 
         public void EigenVectors(out float2 major, out float2 minor)
