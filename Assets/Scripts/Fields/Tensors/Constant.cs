@@ -5,8 +5,11 @@ namespace ProcCityGen.Fields.Tensors
 
     using Unity.Mathematics;
 
+    using UnityEngine;
+
     public class Constant : ITensorField
     {
+        [SerializeField]
         private readonly Tensor _value;
 
         public Constant(Tensor value)

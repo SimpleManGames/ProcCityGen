@@ -6,10 +6,13 @@ namespace ProcCityGen.Fields.Tensors
     using ProcCityGen.Interfaces.Fields.Tensor;
     using ProcCityGen.Interfaces.Fields.Vectors;
 
+    using Sirenix.Serialization;
+
     using Unity.Mathematics;
 
     public class Heightmap : ITensorField
     {
+        [OdinSerialize]
         private readonly IVector2Field _gradient;
 
         public Heightmap(IScalarField height)

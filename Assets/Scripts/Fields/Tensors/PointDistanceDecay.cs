@@ -3,12 +3,19 @@ namespace ProcCityGen.Fields.Tensors
     using ProcCityGen.Data;
     using ProcCityGen.Interfaces.Fields.Tensor;
 
+    using Sirenix.Serialization;
+
     using Unity.Mathematics;
+
+    using UnityEngine;
 
     public class PointDistanceDecay : ITensorField
     {
-        private readonly ITensorField _field;
+        [OdinSerialize]
+        private ITensorField _field;
+        [SerializeField]
         private readonly float2 _center;
+        [SerializeField]
         private readonly float _decay;
 
         public PointDistanceDecay(ITensorField field, float2 center, float decay)
