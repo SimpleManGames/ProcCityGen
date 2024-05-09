@@ -58,7 +58,7 @@ namespace ProcCityGen.Data
 
             if (smooth)
             {
-                r = 0.1;//math.sqrt(a + b);
+                r = math.sqrt(a * a + b * b);
                 a /= r;
                 b /= r;
             }
