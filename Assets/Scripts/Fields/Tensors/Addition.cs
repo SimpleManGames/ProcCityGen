@@ -12,8 +12,13 @@ namespace ProcCityGen.Fields.Tensors
 
     using Unity.Mathematics;
 
+    using UnityEngine;
+
     public class Addition : ITensorField
     {
+        [field: SerializeField]
+        public bool Smooth { get; private set; }
+        
         public float2 Center { get; }
 
         public float Size { get; }
@@ -42,7 +47,7 @@ namespace ProcCityGen.Fields.Tensors
 
             foreach (ITensorField t in _fields)
             {
-                result.Combine(t.Sample(position).Scale(t.GetTensorWeight(position, false)), false);
+                result.Combine(t.Sample(position).Scale(t.GetTensorWeight(position, Smooth)), Smooth);
             }
         }
 
