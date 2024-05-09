@@ -13,7 +13,6 @@ namespace ProcCityGen.Fields.Tensors
         public float2 Center { get; private set; }
 
         [field: SerializeField]
-
         public float Size { get; private set; }
 
         [field: SerializeField]
@@ -27,7 +26,7 @@ namespace ProcCityGen.Fields.Tensors
         public void Sample(ref float2 position, out Tensor result)
         {
             float2 t = new float2(position.x - Center.x, position.y - Center.y);
-            float t1 = (t.y * t.y) - (t.x * t.x);
+            float t1 = math.pow(t.y, 2) - math.pow(t.x, 2);
             float t2 = -2 * t.x * t.y;
             result = new Tensor(1, t1, t2);
         }

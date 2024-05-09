@@ -11,9 +11,9 @@ namespace ProcCityGen.Fields.Tensors
     {
         public float2 Center { get; }
 
-        public float Size { get; }
+        public float Size { get; } = 1;
 
-        public float Decay { get; }
+        public float Decay { get; } = 1;
         
         [SerializeField]
         private readonly Tensor _value;

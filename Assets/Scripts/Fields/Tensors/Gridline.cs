@@ -11,11 +11,14 @@ namespace ProcCityGen.Fields.Tensors
 
     public class Gridline : ITensorField
     {
-        public float2 Center { get; }
+        [field: SerializeField]
+        public float2 Center { get; private set; }
 
-        public float Size { get; }
+        [field: SerializeField]
+        public float Size { get; private set; } = 1;
 
-        public float Decay { get; }
+        [field: SerializeField]
+        public float Decay { get; private set; } = 1;
 
         [SerializeField] private readonly float _angleInDegrees;
 
@@ -25,7 +28,7 @@ namespace ProcCityGen.Fields.Tensors
         {
             float cos = math.cos(2 * theta);
             float sin = math.sin(2 * theta);
-            result =  new Tensor(1, cos, sin);
+            result = new Tensor(1, cos, sin);
         }
     }
 }

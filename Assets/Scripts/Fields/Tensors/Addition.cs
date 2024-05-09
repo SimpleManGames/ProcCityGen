@@ -42,7 +42,7 @@ namespace ProcCityGen.Fields.Tensors
 
             foreach (ITensorField t in _fields)
             {
-                result += t.Sample(position);
+                result.Combine(t.Sample(position).Scale(t.GetTensorWeight(position, false)), false);
             }
         }
 

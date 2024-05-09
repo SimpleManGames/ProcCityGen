@@ -33,7 +33,7 @@ namespace ProcCityGen.Fields.Tensors
             float theta = math.atan2(gradient.y, gradient.x) + (math.PI / 2);
             float r = math.sqrt(gradient.x * gradient.x + gradient.y * gradient.y);
 
-            result = new Tensor(0, 0, 0); //Tensor.Normalize(Tensor.FromAngle(theta));
+            result = Tensor.Normalize(Tensor.FromAngle(theta));
         }
     }
 }

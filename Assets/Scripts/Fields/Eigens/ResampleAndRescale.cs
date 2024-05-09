@@ -98,7 +98,7 @@ namespace ProcCityGen.Field.Eigens
 
             public float2 Sample(float2 position)
             {
-                _field.Sample(_major, ref position, out var result);
+                _field.Sample(_major, ref position, out float2 result);
                 return result;
             }
         }

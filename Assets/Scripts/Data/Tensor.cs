@@ -9,9 +9,9 @@ namespace ProcCityGen.Data
         //     | sin(2theta) -cos(2theta) |    | _ _ |
         // where R >= 0 and theta is [0, 2pi)
 
-        public readonly double r;
-        public readonly double a;
-        public readonly double b;
+        public double r;
+        public double a;
+        public double b;
 
         public Tensor(double r, double a, double b)
         {
@@ -44,11 +44,36 @@ namespace ProcCityGen.Data
 
         public void EigenVectors(out float2 major, out float2 minor)
         {
-            float theta = (float)math.atan2(b / 0.1, a / 0.1) / 2;
+            float theta = (float)math.atan2(b / r, a / r) / 2;
             float angle = theta + math.PI / 2;
 
             major = new float2(math.cos(theta), math.sin(theta));
             minor = new float2(math.cos(angle), math.sin(angle));
+        }
+
+        public Tensor Combine(Tensor other, bool smooth)
+        {
+            a = a * r + other.a * other.r;
+            b = b * r + other.b * other.r;
+
+            if (smooth)
+            {
+                r = 0.1;//math.sqrt(a + b);
+                a /= r;
+                b /= r;
+            }
+            else
+            {
+                r = 2;
+            }
+
+            return this;
+        }
+
+        public Tensor Scale(double s)
+        {
+            r *= s;
+            return this;
         }
     }
 }
