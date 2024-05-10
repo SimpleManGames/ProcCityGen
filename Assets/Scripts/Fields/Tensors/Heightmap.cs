@@ -30,10 +30,11 @@ namespace ProcCityGen.Fields.Tensors
         {
             float2 gradient = _gradient.Sample(position);
 
-            float theta = math.atan2(gradient.y, gradient.x) + (math.PI / 2);
             float r = math.sqrt(gradient.x * gradient.x + gradient.y * gradient.y);
+            float theta = (float)math.atan2(gradient.y / r, gradient.x / r) / 2;
+            // float theta = math.atan2(gradient.y, gradient.x) + (math.PI / 2);
 
-            result = Tensor.Normalize(Tensor.FromAngle(theta));
+            result = Tensor.FromTheta(r, theta);
         }
     }
 }

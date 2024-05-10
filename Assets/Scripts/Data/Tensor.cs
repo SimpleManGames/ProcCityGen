@@ -25,6 +25,11 @@ namespace ProcCityGen.Data
             return new Tensor(1, math.cos(angle * 4), math.sin(angle * 4));
         }
 
+        public static Tensor FromTheta(double r, double theta)
+        {
+            return new Tensor(r, r * math.cos(2 * theta), r * math.sin(2 * theta));
+        }
+
         public static Tensor Normalize(Tensor tensor)
         {
             double l = math.sqrt(tensor.a * tensor.a + tensor.b * tensor.b);

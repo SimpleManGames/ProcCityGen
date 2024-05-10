@@ -4,6 +4,7 @@ using System.Linq;
 
 using ProcCityGen.Fields.Tensors;
 using ProcCityGen.Interfaces.Fields.Eigens;
+using ProcCityGen.Interfaces.Fields.Scalars;
 using ProcCityGen.Interfaces.Fields.Tensor;
 
 using Sirenix.OdinInspector;
@@ -25,7 +26,7 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
 
     [InlineEditor, TypeFilter("GetITensorFieldTypeList"), OdinSerialize]
     public ITensorField Field { get; private set; }
-
+    
     private IEigenField _eigenField;
     private Material _material;
 
@@ -46,6 +47,8 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
         CreateWhiteNoise();
 
         Run();
+        
+        
     }
 
     private void CreateWhiteNoise()
@@ -70,7 +73,7 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
 
     private void Run()
     {
-        _eigenField = Field.PreSample(new float2(0), new float2(width, height), 100);
+        _eigenField = Field.PreSample(new float2(0), new float2(width, height), (uint)width);
         output = new Texture2D(width, height);
 
         for (int x = 0; x < width; x++)
@@ -81,7 +84,7 @@ public class LineIntegralConvolution : SerializedMonoBehaviour
                 float3 col = new float3(c.r, c.g, c.b);
                 int w = 0;
 
-                float2 v = _eigenField.MinorEigenVectors.Sample(new float2(x, y)); // (_eigenField.MajorEigenVectors.Sample(new float2(x, y)) - new float2(0.5)) * 2;
+                float2 v = _eigenField.MajorEigenVectors.Sample(new float2(x, y)); // (_eigenField.MajorEigenVectors.Sample(new float2(x, y)) - new float2(0.5)) * 2;
 
                 float2 st0 = new float2(x, y);
 
