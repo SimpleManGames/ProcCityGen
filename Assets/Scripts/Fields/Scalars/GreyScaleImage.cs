@@ -18,33 +18,22 @@ namespace ProcCityGen.Fields
         public GreyScaleImage(Texture2D image)
         {
             _image = image;
-            GetValuesFromImage();
+            _values = GetValuesFromImage();
         }
 
         public float Sample(float2 position)
         {
-            if (_values == null)
-            {
-                GetValuesFromImage();
-            }
+            _values ??= GetValuesFromImage();
 
-            int x = (int)(position.x);
-            int y = (int)(position.y);
+            int x = (int)position.x;
+            int y = (int)position.y;
 
-            // try
-            // {
-                return _values[y * _image.width + x];
-            // }
-            // catch
-            // {
-                // Debug.Log($"{x} {y} {_image.width} {y * _image.width + x}");
-            // }
-            // return 0;
+            return _values[y * _image.width + x];
         }
 
-        private void GetValuesFromImage()
+        private float[] GetValuesFromImage()
         {
-            _values = _image.GetPixels().Select(x => x.r).ToArray();
+            return _image.GetPixels().Select(x => x.r).ToArray();
         }
     }
 }
