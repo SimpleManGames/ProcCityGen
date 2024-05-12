@@ -1,13 +1,13 @@
 namespace ProcCityGen.Fields.Tensors
 {
     using ProcCityGen.Data;
-    using ProcCityGen.Interfaces.Fields.Tensor;
+    using ProcCityGen.Interfaces;
 
     using Unity.Mathematics;
 
     using UnityEngine;
 
-    public class Radial : ITensorField
+    public class Radial : IBasisField
     {
         [field: SerializeField]
         public float2 Center { get; private set; }
@@ -23,12 +23,12 @@ namespace ProcCityGen.Fields.Tensors
             Center = center;
         }
 
-        public void Sample(ref float2 position, out Tensor result)
+        public Tensor GetTensor(float2 point)
         {
-            float2 t = new float2(position.x - Center.x, position.y - Center.y);
+            float2 t = new float2(point.x - Center.x, point.y - Center.y);
             float t1 = math.pow(t.y, 2) - math.pow(t.x, 2);
             float t2 = -2 * t.x * t.y;
-            result = new Tensor(1, t1, t2);
+            return new Tensor(1, t1, t2);
         }
     }
 }

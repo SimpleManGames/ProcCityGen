@@ -12,7 +12,7 @@ namespace ProcCityGen.Fields.Tensors
 
     using Unity.Mathematics;
 
-    public class WeightedAverage : ITensorField
+    public class WeightedAverage //: ITensorField
     {
         public struct WeightedTenserField
         {
@@ -58,7 +58,7 @@ namespace ProcCityGen.Fields.Tensors
 
             foreach (WeightedTenserField blendPair in _blends)
             {
-                result += blendPair.weight / TotalWeight * blendPair.field.Sample(position);
+                // result += blendPair.weight / TotalWeight * blendPair.field.Sample(position);
             }
         }
     }

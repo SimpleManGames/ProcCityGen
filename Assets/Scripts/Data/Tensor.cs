@@ -13,6 +13,8 @@ namespace ProcCityGen.Data
         public double a;
         public double b;
 
+        public static Tensor Zero => new Tensor(0, 0, 0);
+
         public Tensor(double r, double a, double b)
         {
             this.r = r;

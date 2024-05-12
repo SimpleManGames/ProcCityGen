@@ -422,7 +422,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1104829314
+--- !u!84 &916231154
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,7 +511,7 @@ MonoBehaviour:
         ProcCityGen.Interfaces]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 2|ProcCityGen.Fields.Tensors.Gridline, ProcCityGen.Fields
@@ -535,7 +535,7 @@ MonoBehaviour:
       Data: 0
     - Name: _angleInDegrees
       Entry: 4
-      Data: 45
+      Data: 90
     - Name: 
       Entry: 8
       Data: 
@@ -564,6 +564,30 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 4|ProcCityGen.Fields.Tensors.Radial, ProcCityGen.Fields
+    - Name: <Center>k__BackingField
+      Entry: 7
+      Data: Unity.Mathematics.float2, Unity.Mathematics
+    - Name: x
+      Entry: 4
+      Data: 300
+    - Name: y
+      Entry: 4
+      Data: 300
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Size>k__BackingField
+      Entry: 4
+      Data: 2.04
+    - Name: <Decay>k__BackingField
+      Entry: 4
+      Data: 2.45
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -576,7 +600,7 @@ MonoBehaviour:
   height: 512
   lineLength: 10
   licCompute: {fileID: 7200000, guid: 20aad9a6e19d62d4182e2d5ddee56711, type: 3}
-  result: {fileID: 1104829314}
+  result: {fileID: 916231154}
   material: {fileID: 2100000, guid: ec9d7fbda06afc34898b4ec0a3137fce, type: 2}
 --- !u!23 &2044460263
 MeshRenderer:

@@ -72,11 +72,9 @@ namespace ProcCityGen.Field.Eigens
             {
                 for (int j = 0; j < resolution + 1; j++)
                 {
-                    // float2 p = new float2(i / (float)resolution, j / (float)resolution) + min / new float2(resolution, resolution);
-
                     float2 p = new float2(i, j) + min;
                     
-                    baseField.Sample(ref p, out Tensor t);
+                    Tensor t = baseField.SamplePoint(p);
 
                     t.EigenVectors(out float2 majorEigen, out float2 minorEigen);
 

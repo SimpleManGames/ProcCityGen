@@ -7,7 +7,7 @@ namespace ProcCityGen.Fields.Tensors
 
     using UnityEngine;
 
-    public class Constant : ITensorField
+    public class Constant //: ITensorField
     {
         public float2 Center { get; }
 
