@@ -4,17 +4,17 @@ uint width;
 uint height;
 uint streamlineLength;
 
-Buffer<float4> WhiteNoise;
 Buffer<float2> Vectors;
 
+RWTexture2D<float4> WhiteNoise;
 RWTexture2D<float4> Result;
 
 [numthreads(32,32,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
-	float4 color = WhiteNoise.Load(id.y * width + id.x);
 	float2 val = Vectors.Load(id.y * width + id.x);
-
+	float4 color = WhiteNoise[id.xy];
+	
 	float2 st0 = id.xy;
 
 	uint traced = 0;
@@ -22,7 +22,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 	for(uint forward = 0; forward < streamlineLength; forward++, traced++)
 	{
 		st0 += val;
-		color += WhiteNoise.Load((int)st0.y * width + (int)st0.x);
+		color += WhiteNoise[st0];
 	}
 
 	float2 st1 = id.xy;
@@ -30,7 +30,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 	for(uint reverse = 0; reverse < streamlineLength; reverse++, traced++)
 	{
 		st1 -= val;
-		color += WhiteNoise.Load((int)st1.y * width + (int)st1.x);
+		color +=  WhiteNoise[st1];
 	}
 
 	color /= traced;

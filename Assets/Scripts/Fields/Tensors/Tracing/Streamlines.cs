@@ -8,6 +8,8 @@ namespace ProcCityGen.Fields.Tensors.Tracing
 
     using Unity.Mathematics;
 
+    using UnityEngine;
+
     using Random = Unity.Mathematics.Random;
 
     public class Streamlines
@@ -62,6 +64,84 @@ namespace ProcCityGen.Fields.Tensors.Tracing
             SetParamsSq();
         }
 
+        public void JoinLooseStreamlines()
+        {
+            JoinLooseStreamlineStep(true);
+            JoinLooseStreamlineStep(false);
+        }
+
+        private void JoinLooseStreamlineStep(bool isMajor)
+        {
+            List<float2[]> streamlines = GetStreamline(isMajor);
+
+            for (int index = 0; index < streamlines.Count; index++)
+            {
+                float2[] streamline = streamlines[index];
+
+                if (streamline[0].Equals(streamline[^1]))
+                {
+                    continue;
+                }
+
+                float2? newStartNullable = GetBestNextPoint(streamline[0], streamline[4], streamline);
+
+                if (!newStartNullable.HasValue)
+                {
+                    continue;
+                }
+
+                float2 newStart = newStartNullable.Value;
+
+                foreach (float2 p in PointsBetween(streamline[0], newStart, _streamlineStreamlineParams.dstep))
+                {
+                    // Not the best approach for adding to the front of an array
+                    if (isMajor)
+                    {
+                        majorStreamlines[index] = streamline.Prepend(p).ToArray();
+                    }
+                    else
+                    {
+                        minorStreamlines[index] = streamline.Prepend(p).ToArray();
+                    }
+                    GetGrid(isMajor).AddSample(p);
+                }
+            }
+        }
+
+        private float2[] PointsBetween(float2 v1, float2 v2, float distance)
+        {
+            float d = math.distance(v1, v2);
+            float steps = math.floor(d / distance);
+
+            if (steps == 0)
+            {
+                return new float2[]
+                    { };
+            }
+
+            float2 stepVector = v2 - v1;
+            List<float2> output = new List<float2>();
+
+            int i = 1;
+            float2 next = v1 + stepVector * new float2(i / steps);
+
+            for (i = 1; i < steps; i++)
+            {
+                if (math.lengthsq(_strategy.Trace(next, true)) > 0.001)
+                {
+                    output.Add(next);
+                }
+                else
+                {
+                    return output.ToArray();
+                }
+
+                next = v1 + stepVector * new float2(i / steps);
+            }
+
+            return output.ToArray();
+        }
+
         public bool CreateStreamlines(bool isMajor)
         {
             float2? seedNullable = GetSeed(isMajor);
@@ -77,18 +157,70 @@ namespace ProcCityGen.Fields.Tensors.Tracing
 
             if (!ValidStreamline(streamline))
                 return true;
-            
-            Grid(isMajor).AddPolyline(streamline);
+
+            GetGrid(isMajor).AddPolyline(streamline);
             GetStreamline(isMajor).Add(streamline);
             allStreamlines.Add(streamline);
 
             if (streamline[0].Equals(streamline[^1]))
                 return true;
-            
+
             CandidateSeeds(!isMajor).Enqueue(streamline[0]);
             CandidateSeeds(!isMajor).Enqueue(streamline[^1]);
 
             return true;
+        }
+
+        private float2? GetBestNextPoint(float2 point, float2 previousPoint, float2[] streamline)
+        {
+            float2[] nearbyPoints = _majorGrid.GetNearbyPoints(point, _streamlineStreamlineParams.dlookahead);
+            float2[] minorNearbyPoints = _minorGrid.GetNearbyPoints(point, _streamlineStreamlineParams.dlookahead);
+
+            foreach (float2 minorNearbyPoint in minorNearbyPoints)
+            {
+                nearbyPoints = nearbyPoints.Append(minorNearbyPoint).ToArray();
+            }
+
+            float2 direction = point - previousPoint;
+
+            float2? closestSample = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (float2 sample in nearbyPoints)
+            {
+                if (sample.Equals(point) || sample.Equals(previousPoint))
+                    continue;
+
+                float2 differenceVector = sample - point;
+
+                if (math.dot(differenceVector, direction) > 0)
+                {
+                    continue;
+                }
+
+                float distanceToSample = math.distancesq(point, sample);
+
+                if (distanceToSample < 2 * _streamlineStreamlineParamsSq.dstep)
+                {
+                    closestSample = sample;
+                    break;
+                }
+
+                float angleBetween = math.abs(math.atan2(differenceVector.y - direction.y, differenceVector.x - direction.x));
+
+                if (!(angleBetween < _streamlineStreamlineParams.joinangle) || !(distanceToSample < closestDistance))
+                    continue;
+
+                closestDistance = distanceToSample;
+                closestSample = sample;
+            }
+
+            if (closestSample != null)
+            {
+                closestSample += math.normalize(direction) * _streamlineStreamlineParams.simplifyTolerance * 4;
+            }
+
+            return closestSample;
         }
 
         private bool ValidStreamline(float2[] streamline) => streamline.Length > 5;
@@ -207,12 +339,6 @@ namespace ProcCityGen.Fields.Tensors.Tracing
 
             float2 nextPoint = tracingParams.previousPoint + nextDirection;
 
-            // if (HasStreamlineTurned(tracingParams.point, tracingParams.originalDirection, nextPoint, nextDirection))
-            // {
-            //     tracingParams.isValid = false;
-            //     tracingParams.streamline.Add(float2.zero);
-            // }
-
             if (PointInBounds(nextPoint) &&
                 IsValidSample(isMajor, nextPoint, _streamlineStreamlineParamsSq.dtest, collideBoth) &&
                 !HasStreamlineTurned(tracingParams.point, tracingParams.originalDirection, nextPoint, nextDirection))
@@ -242,17 +368,17 @@ namespace ProcCityGen.Fields.Tensors.Tracing
 
         private bool IsValidSample(bool isMajor, float2 point, float distanceSq, bool bothGrids = false)
         {
-            bool gridValid = Grid(isMajor).IsValidSample(point, distanceSq);
+            bool gridValid = GetGrid(isMajor).IsValidSample(point, distanceSq);
 
             if (bothGrids)
             {
-                gridValid = gridValid && Grid(!isMajor).IsValidSample(point, distanceSq);
+                gridValid = gridValid && GetGrid(!isMajor).IsValidSample(point, distanceSq);
             }
 
             return _strategy.OnLand(point) && gridValid;
         }
 
-        private StreamlineGrid Grid(bool isMajor) => isMajor ? _majorGrid : _minorGrid;
+        private StreamlineGrid GetGrid(bool isMajor) => isMajor ? _majorGrid : _minorGrid;
 
         private float2? GetSeed(bool isMajor)
         {
@@ -304,6 +430,8 @@ namespace ProcCityGen.Fields.Tensors.Tracing
             public float pathIterations;
             public float seedTries;
             public float simplifyTolerance;
+
+            [SerializeField, Range(0.0f, 1.0f)]
             public float collideEarly;
         }
 

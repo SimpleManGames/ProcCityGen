@@ -1,11 +1,8 @@
 namespace ProcCityGen.Fields.Tensors.Tracing
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using Unity.Mathematics;
-
-    using UnityEngine;
 
     public class StreamlineGrid
     {
@@ -30,14 +27,14 @@ namespace ProcCityGen.Fields.Tensors.Tracing
             _dsepSq = _dsep * _dsep;
             _gridDimensions = (int2)math.round(worldDimensions / new float2(dsep));
 
-            int size = (int)_gridDimensions.x * (int)_gridDimensions.y;
+            int size = (_gridDimensions.x + 1) * (_gridDimensions.y + 1);
             _grid = new GridCell[size];
 
-            for (int x = 0; x < _gridDimensions.x; x++)
+            for (int x = 0; x < _gridDimensions.x + 1; x++)
             {
-                for (int y = 0; y < _gridDimensions.y; y++)
+                for (int y = 0; y < _gridDimensions.y + 1; y++)
                 {
-                    _grid[y * (int)_gridDimensions.x + x] = new GridCell
+                    _grid[y * _gridDimensions.x + x] = new GridCell
                     {
                         streamline = new List<float2>()
                     };
@@ -98,7 +95,7 @@ namespace ProcCityGen.Fields.Tensors.Tracing
             }
         }
 
-        private void AddSample(float2 point, float2? coords = null)
+        public void AddSample(float2 point, float2? coords = null)
         {
             coords ??= GetSampleCoords(point);
 
@@ -131,6 +128,28 @@ namespace ProcCityGen.Fields.Tensors.Tracing
         private bool PointOutOfBounds(float2 point, float2 bounds)
         {
             return point.x < 0 || point.y < 0 || point.x >= bounds.x || point.y >= bounds.y;
+        }
+
+        public float2[] GetNearbyPoints(float2 point, float distance)
+        {
+            double radius = math.ceil((distance / _dsep) - 0.5);
+            float2 coords = GetSampleCoords(point);
+            List<float2> output = new List<float2>();
+
+            for (int x = -1; x <= 1 * radius; x++)
+            {
+                for (int y = -1; y <= 1 * radius; y++)
+                {
+                    float2 cell = coords + new float2(x, y);
+
+                    if (PointOutOfBounds(cell, _gridDimensions))
+                        continue;
+
+                    output.AddRange(_grid[(int)cell.y * _gridDimensions.x + (int)cell.x].streamline);
+                }
+            }
+
+            return output.ToArray();
         }
     }
 }

@@ -15,11 +15,13 @@ namespace ProcCityGen.Fields.Tensors
     using Unity.Mathematics;
 
     [Serializable]
+    [ShowOdinSerializedPropertiesInInspector]
     public class TensorField : ITensorField
     {
+        [OdinSerialize]
         public bool smooth;
-        
-        [InlineEditor, TypeFilter("GetIBasisFieldTypeList"), OdinSerialize]
+
+        [OdinSerialize, InlineEditor, TypeFilter("GetIBasisFieldTypeList")]
         private List<IBasisField> _basisFields = new List<IBasisField>();
 
         public Tensor SamplePoint(float2 point)
@@ -30,12 +32,12 @@ namespace ProcCityGen.Fields.Tensors
             }
 
             Tensor tensor = Tensor.Zero;
-            
+
             _basisFields.ForEach(field => tensor.Combine(field.GetWeightedTensor(point, smooth), smooth));
 
             return tensor;
         }
-        
+
         private IEnumerable<Type> GetIBasisFieldTypeList()
         {
             IEnumerable<Type> q = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())

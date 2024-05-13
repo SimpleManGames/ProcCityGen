@@ -1,0 +1,26 @@
+#pragma kernel CSMain
+
+RWTexture2D<float4> Result;
+
+float random(float2 st)
+{
+    return frac(sin(dot(st.xy, float2(12.9898, 78.233))) * 437583.543123);
+}
+
+float randomSingle(float x, float width)
+{
+    return frac(sin(x) * width);
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    for(int x = 0; x < 32; x++)
+    {
+        for(int y = 0; y < 32; y++)
+        {
+            float rnd = random(id.xy);
+            Result[id.xy] = float4(rnd, rnd, rnd, 1.0f);
+        }
+    }
+}
