@@ -4,6 +4,8 @@ using System.Linq;
 
 using ProcCityGen.Interfaces.Fields.Tensor;
 
+using Simplicity.ProceduralGeneration;
+
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
@@ -16,9 +18,12 @@ public class CityGenerator : MonoBehaviour, ISerializationCallbackReceiver
     [MinValue(1)]
     public int width, height;
 
+    [SerializeField]
+    private PerlinNoiseMapGenerator _perlinNoiseMapGenerator;
+    
     [OdinSerialize, TypeFilter("GetITensorFieldTypeList"), Delayed, OnValueChanged("GenerateStreamlines", true)]
     public ITensorField field;
-
+    
     [SerializeField]
     private LineIntegralConvolution lineIntegralConvolution;
 

@@ -306,6 +306,7 @@ MonoBehaviour:
       collideEarly: 0.461
     drawMajor: 1
     drawMinor: 1
+  autoCreateStreamlines: 0
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -315,22 +316,396 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: _perlinNoiseMapGenerator
+      Entry: 7
+      Data: 0|Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator, Assembly-CSharp
+    - Name: <MapWidth>k__BackingField
+      Entry: 3
+      Data: 512
+    - Name: <MapHeight>k__BackingField
+      Entry: 3
+      Data: 512
+    - Name: <NoiseScale>k__BackingField
+      Entry: 4
+      Data: 200
+    - Name: <Octaves>k__BackingField
+      Entry: 3
+      Data: 8
+    - Name: <Persistence>k__BackingField
+      Entry: 4
+      Data: 0.242
+    - Name: <Lacunarity>k__BackingField
+      Entry: 4
+      Data: 2
+    - Name: <Offset>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <UseFalloffMap>k__BackingField
+      Entry: 5
+      Data: false
+    - Name: <Seed>k__BackingField
+      Entry: 3
+      Data: 0
+    - Name: newSeedOnStart
+      Entry: 5
+      Data: false
+    - Name: <Regions>k__BackingField
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 7
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.211764723
+    - Name: 
+      Entry: 4
+      Data: 0.400000036
+    - Name: 
+      Entry: 4
+      Data: 0.776470661
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.28
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.8235295
+    - Name: 
+      Entry: 4
+      Data: 0.8196079
+    - Name: 
+      Entry: 4
+      Data: 0.4901961
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.35
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 4
+      Data: 0.596078455
+    - Name: 
+      Entry: 4
+      Data: 0.09019608
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.45
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.24313727
+    - Name: 
+      Entry: 4
+      Data: 0.419607878
+    - Name: 
+      Entry: 4
+      Data: 0.07450981
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.65
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.356862754
+    - Name: 
+      Entry: 4
+      Data: 0.274509817
+    - Name: 
+      Entry: 4
+      Data: 0.231372565
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.75
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.286274523
+    - Name: 
+      Entry: 4
+      Data: 0.24313727
+    - Name: 
+      Entry: 4
+      Data: 0.207843155
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 0.82
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Simplicity.ProceduralGeneration.PerlinNoiseMapGenerator+ColorRegions,
+        Assembly-CSharp
+    - Name: <Color>k__BackingField
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Height>k__BackingField
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: noiseGradient
+      Entry: 7
+      Data: 2|UnityEngine.Gradient, UnityEngine.CoreModule
+    - Name: 
+      Entry: 7
+      Data: 3|UnityEngine.GradientAlphaKey[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.GradientAlphaKey, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.GradientAlphaKey, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|UnityEngine.GradientColorKey[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.GradientColorKey, UnityEngine.CoreModule
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.GradientColorKey, UnityEngine.CoreModule
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: mode
+      Entry: 7
+      Data: 5|UnityEngine.GradientMode, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <AutoUpdate>k__BackingField
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: field
       Entry: 7
-      Data: 0|ProcCityGen.Fields.Tensors.TensorField, ProcCityGen.Fields
+      Data: 6|ProcCityGen.Fields.Tensors.TensorField, ProcCityGen.Fields
     - Name: smooth
       Entry: 5
       Data: true
     - Name: _basisFields
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[ProcCityGen.Interfaces.IBasisField,
+      Data: 7|System.Collections.Generic.List`1[[ProcCityGen.Interfaces.IBasisField,
         ProcCityGen.Interfaces]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 2|ProcCityGen.Fields.Tensors.Gridline, ProcCityGen.Fields
+      Data: 8|ProcCityGen.Fields.Tensors.Gridline, ProcCityGen.Fields
     - Name: <Center>k__BackingField
       Entry: 7
       Data: Unity.Mathematics.float2, Unity.Mathematics
@@ -357,7 +732,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|ProcCityGen.Fields.Tensors.Radial, ProcCityGen.Fields
+      Data: 9|ProcCityGen.Fields.Tensors.Radial, ProcCityGen.Fields
     - Name: <Center>k__BackingField
       Entry: 7
       Data: Unity.Mathematics.float2, Unity.Mathematics
