@@ -14,7 +14,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 {
 	float2 val = Vectors.Load(id.y * width + id.x);
 	float4 color = WhiteNoise[id.xy];
-	
+
 	float2 st0 = id.xy;
 
 	uint traced = 0;
@@ -30,12 +30,12 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 	for(uint reverse = 0; reverse < streamlineLength; reverse++, traced++)
 	{
 		st1 -= val;
-		color +=  WhiteNoise[st1];
+		color += WhiteNoise[st1];
 	}
 
 	color /= traced;
 
 	Result[id.xy] = color;
-	// Result[id.xy] = WhiteNoise.Load(id.y * width + id.x);
+	// Result[id.xy] = WhiteNoise[id.xy];
 	// Result[id.xy] = float4(val, 0.0f, 1.0f);
 }

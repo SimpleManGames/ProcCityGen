@@ -22,7 +22,7 @@ namespace ProcCityGen.Fields.Tensors.Tracing
             float2 k1 = this.SampleFieldVector(point, isMajor);
             float2 k23 = this.SampleFieldVector(point + new float2(_dstep) / 2, isMajor);
             float2 k4 = this.SampleFieldVector(point + new float2(_dstep), isMajor);
-            
+
             return k1 + k23 * new float2(4) + k4 * new float2(_dstep / 6);
         }
 

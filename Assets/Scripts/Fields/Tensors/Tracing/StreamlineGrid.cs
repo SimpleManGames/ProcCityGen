@@ -145,7 +145,14 @@ namespace ProcCityGen.Fields.Tensors.Tracing
                     if (PointOutOfBounds(cell, _gridDimensions))
                         continue;
 
-                    output.AddRange(_grid[(int)cell.y * _gridDimensions.x + (int)cell.x].streamline);
+                    try
+                    {
+                        output.AddRange(_grid[(int)cell.y * _gridDimensions.x + (int)cell.x].streamline);
+                    }
+                    catch
+                    {
+                        int i = 0;
+                    }
                 }
             }
 

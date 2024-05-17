@@ -2,11 +2,18 @@ using System.Collections.Generic;
 using Simplicity.Noise;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Simplicity.ProceduralGeneration
 {
+    using System;
+
     using ProcCityGen;
+
+    using UnityEditor;
+
+    using UnityEngine.Windows;
+
+    using Random = UnityEngine.Random;
 
     public class PerlinNoiseMapGenerator
     {
@@ -110,6 +117,10 @@ namespace Simplicity.ProceduralGeneration
 
             _noiseTexture = CreateNoiseMap(noise);
 
+            File.WriteAllBytes(Application.dataPath + $"/{nameof(_noiseTexture)}.png",_noiseTexture.EncodeToPNG());
+            
+            AssetDatabase.Refresh();
+            
             return noise;
         }
 

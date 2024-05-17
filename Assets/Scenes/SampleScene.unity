@@ -310,7 +310,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 2800000, guid: 35d5c3e5f8a07d146bdd309bb72266a7, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -330,7 +331,7 @@ MonoBehaviour:
       Data: 200
     - Name: <Octaves>k__BackingField
       Entry: 3
-      Data: 8
+      Data: 6
     - Name: <Persistence>k__BackingField
       Entry: 4
       Data: 0.242
@@ -620,13 +621,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.0392156877
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.0392156877
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.0392156877
     - Name: 
       Entry: 4
       Data: 1
@@ -695,62 +696,50 @@ MonoBehaviour:
       Data: 6|ProcCityGen.Fields.Tensors.TensorField, ProcCityGen.Fields
     - Name: smooth
       Entry: 5
-      Data: true
+      Data: false
     - Name: _basisFields
       Entry: 7
       Data: 7|System.Collections.Generic.List`1[[ProcCityGen.Interfaces.IBasisField,
         ProcCityGen.Interfaces]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 8|ProcCityGen.Fields.Tensors.Gridline, ProcCityGen.Fields
+      Data: 8|ProcCityGen.Fields.Tensors.Heightmap, ProcCityGen.Fields
     - Name: <Center>k__BackingField
       Entry: 7
       Data: Unity.Mathematics.float2, Unity.Mathematics
     - Name: x
       Entry: 4
-      Data: 0
+      Data: 256
     - Name: y
       Entry: 4
-      Data: 0
+      Data: 256
     - Name: 
       Entry: 8
       Data: 
     - Name: <Size>k__BackingField
       Entry: 4
-      Data: 1
+      Data: 500
     - Name: <Decay>k__BackingField
       Entry: 4
       Data: 1
-    - Name: _angleInDegrees
-      Entry: 4
+    - Name: _gradient
+      Entry: 7
+      Data: 9|ProcCityGen.Field.Vectors.Gradient, ProcCityGen.Fields
+    - Name: _scalar
+      Entry: 7
+      Data: 10|ProcCityGen.Fields.GreyScaleImage, ProcCityGen.Fields
+    - Name: _image
+      Entry: 10
       Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 9|ProcCityGen.Fields.Tensors.Radial, ProcCityGen.Fields
-    - Name: <Center>k__BackingField
-      Entry: 7
-      Data: Unity.Mathematics.float2, Unity.Mathematics
-    - Name: x
-      Entry: 4
-      Data: 0
-    - Name: y
-      Entry: 4
-      Data: 0
-    - Name: 
       Entry: 8
       Data: 
-    - Name: <Size>k__BackingField
-      Entry: 4
-      Data: 0
-    - Name: <Decay>k__BackingField
-      Entry: 4
-      Data: 0
     - Name: 
       Entry: 8
       Data: 

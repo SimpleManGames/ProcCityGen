@@ -59,14 +59,14 @@ public class LineIntegralConvolution
         _whiteNoise = new float4[width * height];
         _vectorMap = new float2[width * height];
         uint x, y, z;
-        
+
         if (_whiteNoiseResults == null || _whiteNoiseResults.width != _width || _whiteNoiseResults.height != _height)
         {
             SetupWhiteNoiseComputeShader();
             whiteNoiseCompute.GetKernelThreadGroupSizes(Kernel, out x, out y, out z);
             whiteNoiseCompute.Dispatch(Kernel, width / (int)x, height / (int)y, (int)z);
         }
-        
+
         SetupLineIntegralConvolutionComputeShader();
 
         licCompute.GetKernelThreadGroupSizes(Kernel, out x, out y, out z);
@@ -100,9 +100,10 @@ public class LineIntegralConvolution
     }
 
     private void SetupWhiteNoiseComputeShader()
-    {        
+    {
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+
         _whiteNoiseResults = new RenderTexture(_width, _height, 24)
         {
             enableRandomWrite = true
@@ -140,7 +141,7 @@ public class LineIntegralConvolution
         {
             for (int y = 0; y < _height; y++)
             {
-                float2 v = _eigenField.MinorEigenVectors.Sample(new float2(x, y));
+                float2 v = _eigenField.MajorEigenVectors.Sample(new float2(x, y));
 
                 // Field.SamplePoint(new float2(x, y)).EigenVectors(out float2 major, out float2 minor);
                 _vectorMap[y * _width + x] = v;
