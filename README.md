@@ -1,3 +1,7 @@
+Procedural City Generation
+
+Based on this paper: [Interactive Procedural Street Modeling](https://www.sci.utah.edu/~chengu/street_sig08/street_sig08.pdf)
+
 Line Integral Convolution of the combined tensor fields
 ![IMG_20240508_215015](https://github.com/user-attachments/assets/282d81b5-7d60-4c61-97ba-9e01ee09d6ed)
 
